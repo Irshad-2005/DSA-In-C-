@@ -81,6 +81,7 @@ void printTopViewTree(Node *root)
 }
 int main()
 {
+
     Node *root = buildTree();
     printTopViewTree(root);
     cout << endl;

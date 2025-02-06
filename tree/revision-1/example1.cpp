@@ -8,65 +8,84 @@ public:
     int data;
     Node *left;
     Node *right;
+
     Node(int data)
     {
         this->data = data;
-        this->left = NULL;
-        this->right = NULL;
+        left = NULL;
+        right = NULL;
     }
 };
 
 Node *buildTree()
 {
-    int data;
-    cout << "Enter the value of node : " << endl;
-    cin >> data;
+    int value;
+    cout << "Enter the value of tree : ";
+    cin >> value;
 
-    if (data == -1)
+    if (value == -1)
     {
         return NULL;
     }
 
-    // Step: A -> create a root node
-    Node *root = new Node(data);
+    Node *root = new Node(value);
 
-    // Step:B -> left size call recursion
-    cout << "tree ke left side enter data : " << root->data << endl;
+    cout << "enter the value of tree leftside : " << value << endl;
+
     root->left = buildTree();
+    cout << "enter the value of tree rightside : " << value << endl;
 
-    // Step:C -> right size call recursion
-    cout << "tree ke right side enter data : " << root->data << endl;
     root->right = buildTree();
 
     return root;
 }
 
-void levelOrderTraversal(Node *root)
+void LevelOrderTraversal(Node *root)
 {
     queue<Node *> q;
+
     q.push(root);
+    q.push(NULL);
+    if (root == NULL)
+    {
+        return;
+    }
 
     while (!q.empty())
     {
-
+        // front se node nikalo
         Node *temp = q.front();
+        // queue ko pop kr do
         q.pop();
-        cout << temp->data << " ";
-        // insert child in queue
-
-        if (temp->left != NULL)
+        if (temp == NULL)
         {
-            q.push(temp->left);
+            cout << endl;
+            if (!q.empty())
+            {
+                q.push(NULL);
+            }
         }
-        if (temp->right != NULL)
+        else
         {
-            q.push(temp->right);
+            // answer print kar do
+            cout << temp->data << " ";
+
+            if (temp->left != NULL)
+            {
+                q.push(temp->left);
+            }
+            if (temp->right != NULL)
+            {
+                q.push(temp->right);
+            }
         }
     }
 }
+
 int main()
 {
-    Node *root = buildTree();
-    levelOrderTraversal(root);
+    Node *root = NULL;
+    root = buildTree();
+    LevelOrderTraversal(root);
     return 0;
 }
