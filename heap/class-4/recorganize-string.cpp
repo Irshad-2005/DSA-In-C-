@@ -32,7 +32,6 @@ string recorganizeString(string s)
         char ch = s[i];
         freaq[ch - 'a']++;
     }
-
     for (int i = 0; i < 26; i++)
     {
         if (freaq[i] != 0)
